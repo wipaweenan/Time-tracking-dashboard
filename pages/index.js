@@ -99,14 +99,14 @@ export default function Home() {
           />
           <Card
             color={"bg-[#ff5e7d]"}
-            icon={"bg-[url(/images/icon-Study.svg)]"}
+            icon={"bg-[url(/images/icon-study.svg)]"}
             title={dataStudy.title}
             hour={data[currentTab].study.hour}
             week={data[currentTab].study.totalHour}
           />
           <Card
             color={"bg-[#4bce82]"}
-            icon={"bg-[url(/images/icon-Exercise.svg)]"}
+            icon={"bg-[url(/images/icon-exercise.svg)]"}
             title={dataExercise.title}
             hour={data[currentTab].exercise.hour}
             week={data[currentTab].exercise.totalHour}
