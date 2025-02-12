@@ -1,114 +1,132 @@
+import Card from "@/components/card";
+import {
+  dataExercise,
+  dataPlay,
+  dataSelf,
+  dataSocial,
+  dataStudy,
+  dataWork,
+} from "@/components/data";
 import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import Photo from "../public/images/image-jeremy.png";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              pages/index.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [currentTab, setCurrentTab] = useState("daily");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+  const setTab = (dataTab) => {
+    setCurrentTab(dataTab);
+  };
+
+  const data = {
+    daily: {
+      work: { hour: "5hrs", totalHour: "Yesterday - 7hrs" },
+      play: { hour: "1hr", totalHour: "Yesterday - 8hrs" },
+      study: { hour: "0hrs", totalHour: "Yesterday - 1rs" },
+      exercise: { hour: "1hr", totalHour: "Yesterday - 1hr" },
+      social: { hour: "1hr", totalHour: "Yesterday - 3hrs" },
+      self: { hour: "0hrs", totalHour: "Yesterday - 1hr" },
+    },
+    weekly: {
+      work: { hour: "32hrs", totalHour: "Last Week - 36hrs" },
+      play: { hour: "10hrs", totalHour: "Last Week - 8hrs" },
+      study: { hour: "4hrs", totalHour: "Last Week - 7hrs" },
+      exercise: { hour: "4hrs", totalHour: "Last Week - 5hrs" },
+      social: { hour: "5hrs", totalHour: "Last Week - 10hrs" },
+      self: { hour: "2hrs", totalHour: "Last Week - 2hrs" },
+    },
+    monthly: {
+      work: { hour: "103hrs", totalHour: "Last Month - 128hrs" },
+      play: { hour: "23hrs", totalHour: "Last Month - 29hrs" },
+      study: { hour: "13hrs", totalHour: "Last Month - 19hrs" },
+      exercise: { hour: "11hrs", totalHour: "Last Month - 18hrs" },
+      social: { hour: "21hrs", totalHour: "Last Month - 23hrs" },
+      self: { hour: "7hrs", totalHour: "Last Month - 11hrs" },
+    },
+  };
+
+  return (
+    <div>
+      <div className="flex flex-col gap-4 sm:gap-6 sm:flex-row">
+        <div className="bg-[#1c1f4a] rounded-xl sm:pb-8">
+          <div className="flex flex-row sm:flex-col bg-[#5746ea] rounded-xl pt-8 pl-6 pr-20 sm:h-64 h-36 ">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              className="size-20 sm:size-16  border-2 border-white rounded-full"
+              src={Photo}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div className="flex-row pt-2 pl-4 sm:pl-1">
+            <span className="text-sm text-[#9f98ff] mt-4">Report for</span>
+            <div className="sm:grid ">
+            <span className="text-[34px] font-light text-[#fbfcff] pr-2">
+              Jeremy
+            </span>
+            <span className="text-[34px] font-light text-[#fbfcff] ">
+              Robson
+            </span>
+            </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 sm:grid-cols-1 gap-4 sm:p-6 p-2 sm:text-left text-center text-sm cursor-pointer">
+            {["daily", "weekly", "monthly"].map((tab) => (
+              <div
+                key={tab}
+                className={`cursor-pointer duration-300 px-4 py-2 rounded-md ${
+                  currentTab === tab
+                    ? "text-[#fbfcff]"
+                    : "text-[#9f98ff] hover:text-[#fbfcff]"
+                }`}
+                onClick={() => setCurrentTab(tab)}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 sm:gap-8 text-white">
+          <Card
+            color={"bg-[#f18c65]"}
+            icon={"bg-[url(/images/icon-work.svg)]"}
+            title={dataWork.title}
+            hour={data[currentTab].work.hour}
+            week={data[currentTab].work.totalHour}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+          <Card
+            color={"bg-[#56c2e6]"}
+            icon={"bg-[url(/images/icon-play.svg)]"}
+            title={dataPlay.title}
+            hour={data[currentTab].play.hour}
+            week={data[currentTab].play.totalHour}
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+          <Card
+            color={"bg-[#ff5e7d]"}
+            icon={"bg-[url(/images/icon-Study.svg)]"}
+            title={dataStudy.title}
+            hour={data[currentTab].study.hour}
+            week={data[currentTab].study.totalHour}
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <Card
+            color={"bg-[#4bce82]"}
+            icon={"bg-[url(/images/icon-Exercise.svg)]"}
+            title={dataExercise.title}
+            hour={data[currentTab].exercise.hour}
+            week={data[currentTab].exercise.totalHour}
+          />
+          <Card
+            color={"bg-[#7235d1]"}
+            icon={"bg-[url(/images/icon-social.svg)]"}
+            title={dataSocial.title}
+            hour={data[currentTab].social.hour}
+            week={data[currentTab].social.totalHour}
+          />
+          <Card
+            color={"bg-[#f1c75b]"}
+            icon={"bg-[url(/images/icon-self-care.svg)]"}
+            title={dataSelf.title}
+            hour={data[currentTab].self.hour}
+            week={data[currentTab].self.totalHour}
+          />
+        </div>
+      </div>
     </div>
   );
 }
