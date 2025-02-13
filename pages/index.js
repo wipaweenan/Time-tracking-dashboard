@@ -49,7 +49,7 @@ export default function Home() {
     <div>
       <div className="flex flex-col gap-4 sm:gap-6 sm:flex-row">
         <div className="bg-[#1c1f4a] rounded-xl sm:pb-8">
-          <div className="flex flex-row sm:flex-col bg-[#5746ea] rounded-xl pt-8 pl-6 pr-20 sm:h-64 h-36 ">
+          <div className="flex flex-row sm:flex-col bg-[#5746ea] rounded-xl pt-8 pl-6 pr-20 sm:h-64 h-36 w-[440px] sm:w-[200px]">
             <Image
               className="size-20 sm:size-16  border-2 border-white rounded-full"
               src={Photo}
